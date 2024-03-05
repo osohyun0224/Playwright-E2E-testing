@@ -24,7 +24,7 @@ module.exports = defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'https://playwright-testing-xi.vercel.app/vling/index.html' || 'http://127.0.0.1:3000/vling',
+    baseURL: 'http://127.0.0.1:3000/vling', // 로컬 서버의 URL
     trace: 'on-first-retry',
   },
 
