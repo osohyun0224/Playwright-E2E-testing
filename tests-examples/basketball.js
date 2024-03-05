@@ -1,3 +1,4 @@
+//실행 방법 : node basketball.js
 const readline = require('readline');
 
 function generateRandomNumbers() {
