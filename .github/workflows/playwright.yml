@@ -10,6 +10,10 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4 # 병렬 테스트 실행 설정
+      matrix:
+        nodes: [1, 2, 3, 4] # 병렬로 실행할 노드의 수
     steps:
     - uses: actions/checkout@v3
     
@@ -30,9 +34,14 @@ jobs:
     # 정적 파일 서버 시작
     - name: Start http-server
       run: http-server vling -p 3000 &
+      # 서버가 백그라운드에서 실행됨을 확인하기 위한 대기 시간 추가
+      timeout-minutes: 1
     
     - name: Run Playwright tests
       run: npx playwright test
+      # 병렬 노드에 따라 테스트 분할
+      env:
+        CI_NODE_INDEX: ${{ matrix.nodes }}
     
     - uses: actions/upload-artifact@v3
       if: always()
