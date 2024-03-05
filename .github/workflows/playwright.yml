@@ -1,9 +1,11 @@
 name: Playwright Tests
+
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
   test:
     timeout-minutes: 60
@@ -21,11 +23,13 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     
-    # 웹 서버 시작 단계 추가
-    - name: Start web server
-      run: npm start &
-      env:
-        CI: true
+    # http-server 설치
+    - name: Install http-server
+      run: npm install -g http-server
+    
+    # 정적 파일 서버 시작
+    - name: Start http-server
+      run: http-server vling -p 3000 &
     
     - name: Run Playwright tests
       run: npx playwright test
