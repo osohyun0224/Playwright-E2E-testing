@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Todo List', () => {
     test.beforeEach(async ({ page }) => {
-        await page.goto('http://127.0.0.1:3000/vling/index.html');
+        await page.goto('https://playwright-testing-xi.vercel.app/vling/index.html');
     });
 
     test('할일 목록을 추가해본다.', async ({ page }) => {
