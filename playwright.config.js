@@ -68,9 +68,9 @@ module.exports = defineConfig({
   ],
 
   webServer: {
-    command: 'http-server . -p 3000',
-    url: 'http://127.0.0.1:3000/vling', // 로컬 서버의 URL
-    reuseExistingServer: !process.env.CI,
+    command: 'http-server vling -p 3000',
+    port: 3000,
+    reuseExistingServer: !process.env.CI
   },  
 });
 

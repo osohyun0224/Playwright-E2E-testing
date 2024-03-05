@@ -32,10 +32,13 @@ jobs:
     
     - name: Start http-server and check
       run: |
-        http-server vling -p 3000 & # 백그라운드에서 서버 실행
+        http-server vling -p 8000 & # 8000 포트 사용
         sleep 10 # 서버가 시작될 시간을 기다림
-        curl http://127.0.0.1:3000 # 서버 응답 확인
+        curl http://127.0.0.1:8000 # 서버 응답 확인
       timeout-minutes: 1
+
+    - name: Kill any process using port 3000
+      run: sudo fuser -k 3000/tcp || true
     
     - name: Run Playwright tests
       run: |
