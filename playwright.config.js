@@ -24,7 +24,7 @@ module.exports = defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'http://127.0.0.1:3000/vling',
+    baseURL: 'https://playwright-testing-xi.vercel.app/vling/index.html' || 'http://127.0.0.1:3000/vling',
     trace: 'on-first-retry',
   },
 
