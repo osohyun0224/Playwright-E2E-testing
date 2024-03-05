@@ -2,7 +2,7 @@
 const { test, expect } = require('@playwright/test');
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('https://demo.playwright.dev/todomvc');
+  await page.goto('http://127.0.0.1:3000/vling/index.html'); 
 });
 
 const TODO_ITEMS = [
