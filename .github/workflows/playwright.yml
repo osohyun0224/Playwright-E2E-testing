@@ -11,9 +11,9 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 4 # 병렬 테스트 실행 설정
+      max-parallel: 4
       matrix:
-        nodes: [1, 2, 3, 4] # 병렬로 실행할 노드의 수
+        nodes: [1, 2, 3, 4]
     steps:
     - uses: actions/checkout@v3
     
@@ -27,19 +27,20 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     
-    # http-server 설치
     - name: Install http-server
       run: npm install -g http-server
     
-    # 정적 파일 서버 시작
-    - name: Start http-server
-      run: http-server vling -p 3000 &
-      # 서버가 백그라운드에서 실행됨을 확인하기 위한 대기 시간 추가
+    - name: Start http-server and check
+      run: |
+        http-server vling -p 3000 & # 백그라운드에서 서버 실행
+        sleep 10 # 서버가 시작될 시간을 기다림
+        curl http://127.0.0.1:3000 # 서버 응답 확인
       timeout-minutes: 1
     
     - name: Run Playwright tests
-      run: npx playwright test
-      # 병렬 노드에 따라 테스트 분할
+      run: |
+        npx playwright test
+        echo "Playwright tests completed"
       env:
         CI_NODE_INDEX: ${{ matrix.nodes }}
     
